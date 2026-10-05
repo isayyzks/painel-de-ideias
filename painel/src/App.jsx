@@ -6,6 +6,10 @@ function App() {
 
   function adicionarIdeia(event) {
     event.preventDefault()
+
+    if(novaIdeia.trim() === '') {
+      return
+    }
   }
 
   return (

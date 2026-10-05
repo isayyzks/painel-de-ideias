@@ -10,6 +10,15 @@ function App() {
     if(novaIdeia.trim() === '') {
       return
     }
+
+    const ideia = {
+      id: Date.now(),
+      texto: novaIdeia,
+      feita: false
+    }
+
+    setIdeias((atual) => [...atual, ideia])
+    setNovaIdeia('')
   }
 
   return (
@@ -25,7 +34,16 @@ function App() {
 
     <button type="submit">Adicionar</button>
   </form>
+
+  <div>
+  {ideias.map((ideia) => (
+    <div key={ideia.id}> 
+      <span>{ideia.texto}</span>
+    </div>
+  ))}
 </div>
+</div>
+
   )
 }
 

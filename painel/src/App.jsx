@@ -31,6 +31,12 @@ setNovaIdeia('')
   )
 }
 
+function removerIdeia(id) {
+  setIdeias((atual) =>
+    atual.filter((ideia) => ideia.id !== id)
+  )
+}
+
   return (
     <div>
   <h1>Painel de Ideias</h1>
@@ -51,10 +57,20 @@ setNovaIdeia('')
     <input type = "checkbox"
     checked = {ideia.feita}
     onChange={() => alternarIdeia(ideia.id)} />
-      <span>{ideia.texto}</span>
+
+      <span className={ideia.feita ? 'feita' : ''}>
+        {ideia.texto}
+      </span>
+
+      <button onClick={() => removerIdeia(ideia.id)}>✕</button>
+
     </div>
   ))}
 </div>
+
+<footer>
+  {`${ideias.length} ideias no painel · ${ideias.filter((ideia) => ideia.feita).length} concluídas`}
+</footer>
 </div>
 
   )

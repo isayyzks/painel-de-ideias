@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './App.css'
 
 function App() {
   const [ideias, setIdeias] = useState([])
@@ -20,7 +21,8 @@ function App() {
     }
 
     setIdeias((atual) => [...atual, ideia])
-setNovaIdeia('')
+    setNovaIdeia('')
+    setErro('')
   }
 
   function alternarIdeia(id) {
@@ -40,24 +42,27 @@ function removerIdeia(id) {
 }
 
   return (
-    <div>
+    <div className="pagina">
   <h1>Painel de Ideias</h1>
 
-  <form onSubmit={adicionarIdeia}>
+  <form  className="formulario" onSubmit={adicionarIdeia}>
     <input
       type="text"
       value={novaIdeia}
-      onChange={(event) => setNovaIdeia(event.target.value)}
+      onChange={(event) => {
+        setNovaIdeia(event.target.value)
+        setErro('')
+      }}
     />
 
     <button type="submit">Adicionar</button>
   </form>
 
-  {erro && <p>{erro}</p>}
+  {erro && <p className="erro">{erro}</p>}
 
-  <div>
+  <div className="lista-ideias">
   {ideias.map((ideia) => (
-    <div key={ideia.id}> 
+    <div className="ideia" key={ideia.id}> 
     <input type = "checkbox"
     checked = {ideia.feita}
     onChange={() => alternarIdeia(ideia.id)} />
@@ -66,7 +71,9 @@ function removerIdeia(id) {
         {ideia.texto}
       </span>
 
-      <button onClick={() => removerIdeia(ideia.id)}>✕</button>
+      <button 
+        className="botao-remover"
+      onClick={() => removerIdeia(ideia.id)}>✕</button>
 
     </div>
   ))}

@@ -3,11 +3,13 @@ import { useState } from 'react'
 function App() {
   const [ideias, setIdeias] = useState([])
   const [novaIdeia, setNovaIdeia] = useState('')
+  const [erro, setErro] = useState('')
 
   function adicionarIdeia(event) {
     event.preventDefault()
 
     if(novaIdeia.trim() === '') {
+      setErro('Digite sua ideia antes de adicionar.')
       return
     }
 
@@ -50,6 +52,8 @@ function removerIdeia(id) {
 
     <button type="submit">Adicionar</button>
   </form>
+
+  {erro && <p>{erro}</p>}
 
   <div>
   {ideias.map((ideia) => (

@@ -18,8 +18,18 @@ function App() {
     }
 
     setIdeias((atual) => [...atual, ideia])
-    setNovaIdeia('')
+setNovaIdeia('')
   }
+
+  function alternarIdeia(id) {
+  setIdeias((atual) =>
+    atual.map((ideia) =>
+      ideia.id === id
+        ? { ...ideia, feita: !ideia.feita }
+        : ideia
+    )
+  )
+}
 
   return (
     <div>
@@ -38,6 +48,9 @@ function App() {
   <div>
   {ideias.map((ideia) => (
     <div key={ideia.id}> 
+    <input type = "checkbox"
+    checked = {ideia.feita}
+    onChange={() => alternarIdeia(ideia.id)} />
       <span>{ideia.texto}</span>
     </div>
   ))}
